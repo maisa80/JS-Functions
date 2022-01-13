@@ -166,7 +166,6 @@ let res = printAnyRange(25, 46);
 console.log(res);
 
 
-
 /**
  * Exercise 1.6 
  *
