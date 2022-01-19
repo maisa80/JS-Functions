@@ -55,23 +55,16 @@ console.log('*** Exercise 1.2 ***');
 let text = '';
 
 function fruitColor(fruit) {
-
-    switch (fruit) {
-        case "banana":
-            text = `yellow`;
-            break;
-        case "apple":
-            text = `green`;
-            break;
-        case "kiwi":
-            text = `green`;
-            break;
-        case "plum":
-            text = `red`;
-            break;
-    }
-    return text;
-
+	switch(fruit) {
+		case 'banana':
+			return 'yellow';
+		case 'apple':
+			return 'green';
+		case 'kiwi':
+			return 'green';
+		case 'plum':
+			return 'red';
+	}
 }
 let fruitResult = fruitColor("plum");
 console.log(`The color of plum is ${fruitResult}`);
@@ -89,23 +82,43 @@ console.log(`The color of plum is ${fruitResult}`);
  *
  
  */
+ console.log('*** Exercise 1.3 ***');
+ // Solution 1
+ // function printRange(rangeStart, rangeStop) {
+ // 	console.log(rangeStart, rangeStop);
+ 
+ // 	let result = '';
+ // 	let firstIteration = true;
+ // 	// "25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46";
+ 
+ // 	for(let i = rangeStart; i <= rangeStop; i++) {
+ // 		if (firstIteration) {
+ // 			result += `${i}`;
+ // 			firstIteration = false;
+ // 		} else {
+ // 			result += `,${i}`
+ // 		}
+ 
+ // 		console.log(result);
+ // 	}
+ 
+ // 	return result;
+ // }
+ 
+ // Solution 2
+ function printRange(rangeStart, rangeStop) {
+     let result = '';
+ 
+     for(let i = rangeStart; i <= rangeStop; i++) {
+         result += `${i},`
+        // console.log(result);
+     }
+ 
+     return result.slice(0, -1); // Slices away the last char
+ }
+ 
 
-console.log('*** Exercise 1.3 ***');
-let numbers = '';
-
-function printRange(rangeStart, rangeStop) {
-    for (let i = rangeStart; i <= rangeStop; i++) {
-        numbers += i + ',';
-
-    }
-
-    return numbers.slice(0, -1);
-
-}
-
-let result = printRange(25, 46);
-
-console.log(result);
+console.log(printRange(25, 46));
 
 /**
  * Exercise 1.4 
@@ -119,17 +132,17 @@ console.log(result);
  
  */
 console.log('*** Exercise 1.4 ***');
-let num = '';
 function printRangeReversed(rangeStart, rangeStop) {
-    for (var i = rangeStart; i >= rangeStop; i--) {
+	let result = '';
 
-        num += i + ',';
-    }
-    return num.slice(0, -1);
+	for(let i = rangeStart; i >= rangeStop; i--) {
+		result += `${i},`
+		//console.log(result);
+	}
+
+	return result.slice(0, -1); // Slices away the last char
 }
-
-let reversedResult = printRangeReversed(46, 25);
-console.log(reversedResult);
+console.log(printRangeReversed(46, 25));
 
 /**
  * Exercise 1.5 
@@ -153,17 +166,17 @@ console.log(reversedResult);
 console.log('*** Exercise 1.5 ***');
 
 function printAnyRange(rangeStart, rangeStop) {
-    if (rangeStart < rangeStop) {
-        return printRange(rangeStart, rangeStop);
-    }
-    if (rangeStart > rangeStop) {
-        return printRangeReversed(rangeStart, rangeStop);
-    }
-
+	if (rangeStart < rangeStop) {
+		return printRange(rangeStart, rangeStop);
+	} else if (rangeStart > rangeStop)  {
+		return printRangeReversed(rangeStart, rangeStop);
+	} else {
+		return "rangeStart and rangeStop must not be equal"
+	}
 }
 
-let res = printAnyRange(25, 46);
-console.log(res);
+
+console.log(printAnyRange(25, 46));
 
 
 /**
@@ -176,12 +189,14 @@ console.log(res);
  
  */
 console.log('*** Exercise 1.6 ***');
-function stringRepeat(text, count) {
-    var repeat = "";
-    for (var i = 0; i < count; i++) {
-        repeat += text;
-    }
-    return repeat;
+function stringRepeat(word, repeat) {
+	let result = '';
+	for(let i = 1; i <= repeat; i++) {
+		result += word;
+		//console.log(result);
+	}
+
+	return result;
 }
 
 var myString = stringRepeat("grey", 12);
@@ -203,13 +218,11 @@ console.log(myString);
  */
 console.log('*** Exercise 1.7 ***');
 function inRange(rangeStart, rangeStop, value) {
-    if (value > rangeStart && value < rangeStop) {
-        return true;
-    }
-    else {
-        return false;
-    }
-
+	if (rangeStart < value && rangeStop > value) {
+		return true;
+	} else {
+		return false;
+	}
 }
 let isInRange = inRange(131, 547, 434);
 
@@ -239,12 +252,14 @@ console.log(isInRange2);
  
  */
 console.log('*** Exercise 1.9 ***');
-function degreesToRadians(degree) {
-    let radiansValue = (degree * Math.PI) / 180.0;
-    //console.log(radiansValue);
-    let rounded = Math.round(radiansValue * 10000) / 10000;
-    // console.log(rounded);
-    return rounded;
+function degreesToRadians(degrees) {
+	let radians = degrees * Math.PI / 180; 
+	
+	// radians = 0.5585053606381855
+	// radians * 10000 = 5585.053606381855
+	// Math.round(5585.053606381855) = 5585
+	// 5585 / 10000 = 0.5585
+	return Math.round(radians * 10000) / 10000; 
 }
 
 let value = degreesToRadians(32);
@@ -294,7 +309,12 @@ function fizzBuzz(start, stop) {
 let res11 = fizzBuzz(1, 30);
 
 console.log(res11);
-
+// Modulus explained
+console.log('######### Modulus explained #######')
+console.log( 10 % 2 ); // 0
+console.log( 10 % 3 ); // 1
+console.log( 10 % 4 ); // 2
+console.log( 10 % 5 ); // 0
 /** ----------------------------------------------------------------------
  * Section 2 . Extra assignments
  *
@@ -319,21 +339,39 @@ console.log(res11);
 
  */
 console.log('*** Exercise 2.1 ***');
-let playerSum = 0;
-let dealerSum = 0;
-function printSum(player, dealer) {
-    for (let i = 0; i < player.length; i++) {
-        playerSum += player[i];
-    }
-    for (let i = 0; i < dealer.length; i++) {
-        dealerSum += dealer[i];
-    }
-    return `Player: ${playerSum}, Dealer: ${dealerSum}`;
-
+//solution1
+function printSum1(playerSum, dealerSum) {
+	return `Player: ${playerSum}, Dealer: ${dealerSum}`;
 }
 
-let cardsResult = printSum([4, 10, 3], [3, 6, 11]);
-console.log(cardsResult);
+
+let player1 = 4;
+let player2 = 10;
+let player3 = 3;
+let playerCardSum = player1 + player2 + player3;
+
+let dealer1 = 3;
+let dealer2 = 6;
+let dealer3 = 11;
+let dealerCardSum = dealer1 + dealer2 + dealer3;
+console.log(printSum1(playerCardSum, dealerCardSum));
+
+//solution 2
+// let playerSum = 0;
+// let dealerSum = 0;
+// function printSum(player, dealer) {
+//     for (let i = 0; i < player.length; i++) {
+//         playerSum += player[i];
+//     }
+//     for (let i = 0; i < dealer.length; i++) {
+//         dealerSum += dealer[i];
+//     }
+//     return `Player: ${playerSum}, Dealer: ${dealerSum}`;
+
+// }
+
+// let cardsResult = printSum([4, 10, 3], [3, 6, 11]);
+// console.log(cardsResult);
 
 /**
  * Exercise 2.2 
@@ -358,47 +396,32 @@ console.log(cardsResult);
  
  */
 console.log('*** Exercise 2.2 ***');
-let sum1 = 0;
-let sum2 = 0;
-function printResult(player, dealer) {
-    for (let i = 0; i < player.length; i++) {
-        sum1 += player[i];
-    }
-    for (let i = 0; i < dealer.length; i++) {
-        sum2 += dealer[i];
-    }
-    if (sum1 === 21) {
-        sum1 = 'black jack';
-    }
-    if (sum1 < 21) {
-        sum1 = 'safe';
+function printResult(playerSum, dealerSum) {
+	let playerResult = '';
+	if (playerSum < 21) {
+		playerResult = 'safe';
+	} else if (playerSum > 21) {
+		playerResult = 'busted';
+	} else {
+		playerResult = 'black jack';
+	}
+	
+	let dealerResult = '';
+	if (dealerSum < 17) {
+		dealerResult = 'pick';
+	} else if (dealerSum >= 17 && dealerSum < 21) {
+		dealerResult = 'stop';
+	} else if (dealerSum === 21) {
+		dealerResult = 'black jack';
+	} else {
+		dealerResult = 'busted';
+	}
 
-    }
-    if (sum1 > 21) {
-        sum1 = 'busted';
-    }
-
-
-    if (sum2 === 21) {
-        sum2 = 'black jack';
-    }
-    if (sum2 < 17) {
-        sum2 = 'safe';
-    }
-    if (sum2 >= 17 && sum2 < 21) {
-        sum2 = 'stop';
-
-    }
-    if (sum2 > 21) {
-        sum2 = 'busted';
-    }
-    return `Player: ${sum1}, Dealer: ${sum2}`;
-
+	return `Player: ${playerResult}, Dealer: ${dealerResult}`;
 }
 
-let cards = printResult([4, 10, 3], [3, 6, 11]);
+console.log(printResult(playerCardSum, dealerCardSum));
 
-console.log(cards);
 
 /**
  * Exercise 2.3 
@@ -412,14 +435,22 @@ console.log(cards);
  * Test your function and answer with the result with a maximum of 4 decimals.
   */
 console.log('*** Exercise 2.3 ***');
-function calculateInterest(total, numberOfYears, rate) {
-    let interestRate = ((rate / 100) + 1);
-    let totalInterest = (total * Math.pow(interestRate, numberOfYears));
-    let rondedResult = Math.round(totalInterest * 10000) / 10000;
-    return rondedResult;
+//solution1
+// function calculateInterest(total, numberOfYears, rate) {
+//     let interestRate = ((rate / 100) + 1);
+//     let totalInterest = (total * Math.pow(interestRate, numberOfYears));
+//     let rondedResult = Math.round(totalInterest * 10000) / 10000;
+//     return rondedResult;
+// }
+//console.log(calculateInterest(745, 31, 5));
+
+//solution2
+function calculateInterest(startMoney, years, interestRate) {
+	let rateInDecimals = interestRate/100 + 1;
+	let result = startMoney * Math.pow(rateInDecimals, years);
+
+	return parseFloat(result.toFixed(4));
 }
 
-let money = calculateInterest(745, 31, 5);
-
-console.log(money);
+console.log(calculateInterest(745, 31, 5));
 
